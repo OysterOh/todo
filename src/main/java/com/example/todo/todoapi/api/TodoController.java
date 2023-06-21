@@ -19,6 +19,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/todos")
+@CrossOrigin(origins = "http://localhost:3000")     //다른 url 접속 허락해주기
 public class TodoController {
 
     private final TodoService todoService;
