@@ -15,13 +15,13 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "tbl_user")
 public class User {
-    @Id
+    @Id //primary key
     @Column(name = "user_id")
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;  //계정명이 아니라 식별 코드
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false)    //not null
     private String email;
 
     @Column(nullable = false)

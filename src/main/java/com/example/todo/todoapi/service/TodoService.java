@@ -29,6 +29,7 @@ public class TodoService {
     //목록 리턴 메서드를 서비스에서 처리한다
     public TodoListResponseDTO retrieve() {
         List<Todo> entityList = todoRepository.findAll();
+                                                // jpa 기본 제공 메서드
         List<TodoDetailResponseDTO> dtoList = entityList.stream()
                 .map(TodoDetailResponseDTO::new)
 //                .map(todo -> new TodoDetailResponseDTO(todo))
