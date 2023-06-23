@@ -43,7 +43,6 @@ public class TodoController {
                     .body(TodoListResponseDTO.builder().error(e.getMessage()));
         }
 
-
     }
 
     // 할 일 삭제 요청
