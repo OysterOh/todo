@@ -13,6 +13,7 @@ public interface TodoRepository
 
     //특정 회원의 할 일 목록 리턴
     // SELECT * FROM tbl_todo WHERE user_id = ?
-    @Query("SELECT t FROM Todo T WHERE t.user = :user")
+    @Query("SELECT t FROM Todo t WHERE t.user = :user")
     List<Todo> findAllByUser(@Param("user") User user);
+
 }
