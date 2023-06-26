@@ -1,17 +1,25 @@
 package com.example.todo.config;
 
+import com.example.todo.filter.JwtAuthFilter;
+import com.example.todo.userapi.entity.Role;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.filter.CorsFilter;
 
 //@Configuration  // 설정 클래스 용도로 사용하도록 스프링에 등록하는 어노테이션
 @EnableWebSecurity  // 시큐리티 설정 파일로 사용할 클래스 선언
+@RequiredArgsConstructor
 public class WebSecurityConfig {
 
+    private final JwtAuthFilter jwtAuthFilter;
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -30,9 +38,27 @@ public class WebSecurityConfig {
                 //Cross Site Request Forgery
                 //  : 웹 애플리케이션의 특정한 요청에 대한 인증을 위한 토큰을 생성하고 검증하는 보안기능
 
-                .httpBasic().disable();
+                .httpBasic().disable()
                 //HTTP 기본 인증 비활성화
                 //(기본 인증: 사용자의 아이디와 패스워드를 요청 헤더에 포함시켜 인증을 수행하는 방식)
+
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                //세션 인증을 사용하지 않겠다
+                .and()
+                //어떤 요청에서 인증을 안할 것인지 설정, 언제 할 것인지 설정
+                .authorizeRequests().antMatchers("/", "/api/auth/**")
+                .permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/todos").hasRole("ADMIN")
+                .anyRequest().authenticated()
+        ;
+
+        // 토큰 인정 필터 연결
+        http.addFilterAfter(
+                jwtAuthFilter,
+                CorsFilter.class    //import spring
+        );
+
 
         return http.build();
     }

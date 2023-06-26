@@ -27,7 +27,8 @@ public class TodoController {
     // 할 일 등록 요청
     @PostMapping
     public ResponseEntity<?> createTodo(@Validated @RequestBody TodoCreateRequestDTO requestDTO,
-                                        BindingResult result) {
+                                        BindingResult result
+    ) {
         if(result.hasErrors()) {
             log.warn("DTO 검증 에러 발생: {}", result.getFieldErrors());
             return ResponseEntity.badRequest().body(result.getFieldErrors());
