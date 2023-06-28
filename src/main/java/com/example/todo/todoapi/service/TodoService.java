@@ -95,12 +95,14 @@ public class TodoService {
             throws RuntimeException {
 
         Optional<Todo> targetEntity
+                //Optional : 결과가 존재하지 않을 수 있다.
                 = todoRepository.findById(requestDTO.getId());
 
         targetEntity.ifPresent(entity -> {
             entity.setDone(requestDTO.isDone());
 
             todoRepository.save(entity);
+                //DB에 저장
         });
 
         return retrieve(userId);
