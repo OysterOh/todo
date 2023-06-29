@@ -53,6 +53,7 @@ public class WebSecurityConfig {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.PUT, "/api/auth/promote")
                 .authenticated()
+                .antMatchers("/api/auth/load-profile").authenticated()
                 .antMatchers("/", "/api/auth/**")
                 .permitAll()
 //                .antMatchers(HttpMethod.POST, "/api/todos").hasRole("ADMIN")
