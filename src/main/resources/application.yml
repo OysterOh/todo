@@ -36,7 +36,7 @@ upload:
 # s3 접근 설정
 aws:
   credentials:
-    accessKey: AKIASXEV3NRYM7S5URFB
-    secretKey: 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
+    accessKey: AKIASXEV3NRYK6ZL24HD
+    secretKey: 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
   region: ap-northeast-2
   bucketName: todo-app-upload-file-bucket2430
