@@ -44,7 +44,7 @@ public class S3Service {
 
     /**
      * 버킷에 파일을 업로드하고, 업로드한 버킷의 url 정보를 리턴
-     * @param uploadFile 업로드할 파링ㄹ의 실제 raw 데이터
+     * @param uploadFile 업로드할 파일의 실제 raw 데이터
      * @param fileName 업로드할 파일명
      * @return 버킷에 업로드된 버킷 경로(url)
      */
